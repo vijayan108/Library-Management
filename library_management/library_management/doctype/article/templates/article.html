@@ -3,30 +3,29 @@
 {% block page_content %}
 
 <div class="py-20 row">
-<div class="col-sm-2">
-<img alt="{{ title }}" src="{{ image }}"/>
-</div>
-<div class="col">
-<h1>{{ title }}</h1>
-<p class="lead">By {{ author }}</p>
-<div>
+    <div class="col-sm-2">
+        <img alt="{{ title }}" src="{{ image }}"/>
+    </div>
+    <div class="col">
+        <h1>{{ title }}</h1>
+        <p class="lead">By {{ author }}</p>
+        <div>
 
             {%- if status == 'Available' -%}
-
-            <span class="badge badge-success">Available</span>
+                <span class="badge badge-success">Available</span>
+                <a href="/library-transaction/" class="btn btn-primary mt-3">Buy Now</a>
             {%- elif status == 'Issued' -%}
-
-            <span class="badge badge-primary">Issued</span>
-
+                <span class="badge badge-primary">Issued</span>
+                <button class="btn btn-secondary mt-3" disabled>Not Available</button>
             {%- endif -%}
 
         </div>
-<div class="mt-4">
-<div>Publisher: <strong>{{ publisher }}</strong></div>
-<div>ISBN: <strong>{{ isbn }}</strong></div>
-</div>
-<p>{{ description }}</p>
-</div>
+        <div class="mt-4">
+            <div>Publisher: <strong>{{ publisher }}</strong></div>
+            <div>ISBN: <strong>{{ isbn }}</strong></div>
+        </div>
+        <p>{{ description }}</p>
+    </div>
 </div>
 
 {% endblock %}

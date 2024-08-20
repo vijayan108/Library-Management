@@ -15,6 +15,7 @@ class LibraryTransaction(Document):
             # set the article status to be Issued
             article = frappe.get_doc("Article", self.article)
             article.status = "Issued"
+            article.custom_issued_member = self.library_member
             article.save()
 
         elif self.type == "Return":
@@ -22,18 +23,19 @@ class LibraryTransaction(Document):
             # set the article status to be Available
             article = frappe.get_doc("Article", self.article)
             article.status = "Available"
+            article.custom_issued_member = ""
             article.save()
             # calculate the outstanding amount and charge the ₹50  minus from the outstanding amount and update
             outstanding_fine = frappe.db.get_value(
                 "Library Member",
                 self.library_member,
-                "custom_oustanding_amount",
+                "custom_outstanding_amount",
             )
             outstanding_fine -= 50
             frappe.db.set_value(
                 "Library Member",
                 self.library_member,
-                "custom_oustanding_amount",
+                "custom_outstanding_amount",
                 outstanding_fine,
             )
 
@@ -80,7 +82,7 @@ class LibraryTransaction(Document):
         outstanding_fine = frappe.db.get_value(
             "Library Member",
             self.library_member,
-            "custom_oustanding_amount",
+            "custom_outstanding_amount",
         )
         # check outstanding fine is lesser than 500 then thorw error that have less than 500 fine
         if outstanding_fine < 500:

@@ -13,10 +13,10 @@
 
             {%- if status == 'Available' -%}
                 <span class="badge badge-success">Available</span>
-                <a href="/library-transaction/" class="btn btn-primary mt-3">Buy Now</a>
+                <a href="/library-transaction/new?article={{ title }}&type=Issue" class="btn btn-primary mt-3">Buy Now</a>
             {%- elif status == 'Issued' -%}
                 <span class="badge badge-primary">Issued</span>
-                <button class="btn btn-secondary mt-3" disabled>Not Available</button>
+                <a href="/library-transaction/new?article={{ title }}&type=Return&library_member={{custom_issued_member }}" class="btn btn-secondary mt-3">Return Book</a>
             {%- endif -%}
 
         </div>

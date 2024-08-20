@@ -5,8 +5,15 @@
 	<img alt="{{ doc.name }}" src="{{ doc.image }}"/>
 	</div>
 	<div class="col">
-	<a class="font-size-lg" href="{{ doc.route }}">{{ doc.name }}</a>
+	<a class="font-size-lg" href="{{ doc.route | urlencode  }}">{{ doc.name }}</a>
 	<p class="text-muted">By {{ doc.author }}</p>
+	{%- if doc.status == 'Available' -%}
+	<span class="badge badge-success">Available</span>
+	
+{%- elif doc.status == 'Issued' -%}
+	<span class="badge badge-primary">Issued</span>
+	
+{%- endif -%}
 	</div>
 	</div>
 	
